@@ -1,0 +1,139 @@
+Term Identification HIT
+
+Properties
+-----------
+Title: Select words in product reviews
+Description: Read two product reviews and select words that are important to your purchasing decision
+Keywords: identify, identification, shopping, review, reviews, product, products, key, word, words, term, terms
+Reward per assignment: $0.05
+Number of assignments per HIT: 5
+Time allotted per assignment: 1 hours
+HIT expires in: 14 days
+Auto-approve and pay workers in: 2 days
+Location is US
+Hit approval rate >= 98%
+Number of HITs approved >= 500
+
+Design Layout
+-------------
+<!-- Bootstrap v3.0.3 -->
+<link href="https://s3.amazonaws.com/mturk-public/bs30/css/bootstrap.min.css" rel="stylesheet" />
+<section class="container" id="Survey" style="margin-bottom:15px; padding: 10px 10px; font-family: Verdana, Geneva, sans-serif; color:#333333; font-size:0.9em;">
+<div class="row col-xs-12 col-md-12"><!-- Instructions -->
+<div class="panel panel-primary">
+<div class="panel-heading"><strong>Instructions</strong></div>
+
+<div class="panel-body">
+<p><span style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; line-height: 20.7999992370605px;">Completing this HIT constitutes agreement to our&nbsp;</span><a href="http://www4.ncsu.edu/~mbcusick/consent/consentform.pdf" style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; line-height: 20.7999992370605px; background-color: rgb(255, 255, 255);" target="_blank">consent form</a><span style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; line-height: 20.7999992370605px;">.</span></p>
+
+<p>Imagine you are shopping online and&nbsp;reading product reviews.</p>
+
+<p>Please&nbsp;identify words&nbsp;that you consider important or&nbsp;help you decide to buy or not to buy a product. &nbsp;These could be words that describe the writer, the product, or anything else you consider important.</p>
+
+<p>Single click a word to select it (the word will become highlighted). &nbsp;Clicking again will unselect it. &nbsp;You may select multiple words in sequence, but we would like you to limit this to short phrases (2-4 words).</p>
+</div>
+</div>
+<!-- End Instructions --><!-- Survey Body -->
+
+<section>
+<h4 style="color: rgb(51, 51, 51);"><strong>Product Review #${review1Id}</strong></h4>
+
+<p class="noselect">${review1}</p>
+
+<p>&nbsp;</p>
+
+<h4 style="color: rgb(51, 51, 51);"><strong>Product Review #${review2Id}</strong></h4>
+
+<p class="noselect">${review2}</p>
+
+<fieldset class="hideme"><textarea class="form-control" id="theBox1" name="keyphrases1"></textarea></fieldset>
+
+<fieldset class="hideme"><textarea class="form-control" id="theBox2" name="keyphrases2"></textarea></fieldset>
+</section>
+<!-- End Survey Body --><!-- close container -->
+<style type="text/css">fieldset {
+        padding: 10px; background:#fbfbfb; border-radius:5px; margin-bottom:5px;
+    }
+    fieldset.hideme {
+        display: none;
+    }
+
+.noselect {
+ -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+</style>
+</div>
+</section>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script><script>
+var keyTerms1 = [];
+var keyTerms2 = [];
+
+function getJsonObj(element) {
+    return {"word":$(element).text(),"index":$(element).attr('id')};
+}
+
+function addToResult(element, array) {
+    array[array.length] = getJsonObj(element);
+    return array;
+}
+
+function removeFromResult(element, array) {
+    var reviewObj = getJsonObj(element);
+    array = jQuery.grep(array, function(value) {
+        return (value["word"] != reviewObj["word"] && value["index"] != reviewObj["index"]);
+    });
+    return array;
+}
+
+function updateText() {
+    theBox1.value = JSON.stringify(keyTerms1);
+    theBox2.value = JSON.stringify(keyTerms2);
+}
+
+$(function() {
+    $("span.rev1").click(function() {
+        var $this = $(this);
+
+        var clickCount = ($this.data("zheToggles") || false);
+        if (clickCount == true) {
+            $this.data("zheToggles", false); 
+            $this.css('color', 'black');
+            $this.css('background', 'white');
+            keyTerms1 = removeFromResult(this, keyTerms1);
+        } else {
+            $this.data("zheToggles", true);
+            $this.css('background', 'CornflowerBlue');
+            $this.css('color', 'white');
+            keyTerms1 = addToResult(this, keyTerms1);
+        }
+
+        updateText();
+    });
+});
+
+$(function() {
+    $("span.rev2").click(function() {
+        var $this = $(this);
+
+        var clickCount = ($this.data("zheToggles") || false);
+        if (clickCount == true) {
+            $this.data("zheToggles", false); 
+            $this.css('color', 'black');
+            $this.css('background', 'white');
+            keyTerms2 = removeFromResult(this, keyTerms2);
+        } else {
+            $this.data("zheToggles", true);
+            $this.css('background', 'CornflowerBlue');
+            $this.css('color', 'white');
+            keyTerms2 = addToResult(this, keyTerms2);
+        }
+
+        updateText();
+    });
+});
+</script>

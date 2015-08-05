@@ -1,0 +1,1 @@
+In this folder are files containing the specific Amazon Mechanical Turk settings and code in order to run Human Generated Topic HITs and an evaluation study.

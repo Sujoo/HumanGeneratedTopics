@@ -1,0 +1,87 @@
+Topic Placement HIT
+
+Properties
+-----------
+Title: Identify appropriate group placement for words
+Description: Place 5 words into appropriate groups of similar words
+Keywords: identify, identification, shopping, review, reviews, product, products, key, word, words, term, terms
+Reward per assignment: $0.05
+Number of assignments per HIT: 5
+Time allotted per assignment: 1 hours
+HIT expires in: 14 days
+Auto-approve and pay workers in: 2 days
+Location is US
+Hit approval rate >= 98%
+Number of HITs approved >= 500
+
+Design Layout
+-------------
+<!-- Bootstrap v3.0.3 -->
+<link href="https://s3.amazonaws.com/mturk-public/bs30/css/bootstrap.min.css" rel="stylesheet" />
+<section class="container" id="Survey" style="margin-bottom:15px; padding: 10px 10px; font-family: Verdana, Geneva, sans-serif; color:#333333; font-size:0.9em;">
+<div class="row col-xs-12 col-md-12"><!-- Instructions -->
+<div class="panel panel-primary">
+<div class="panel-heading"><strong>Instructions</strong></div>
+
+<div class="panel-body">
+<p>Completing this HIT constitutes agreement to our <a href="http://www4.ncsu.edu/~mbcusick/consent/consentform.pdf" target="_blank">consent form</a>.</p>
+
+<p><span style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; line-height: 20.7999992370605px;">Assign words to a group by using the dropdown box next to each word.</span></p>
+
+<p>Below are numbered groups of similar words and a list of words that need to be assigned to a group.&nbsp;<span style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; line-height: 20.7999992370605px;">You may h</span><span style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; line-height: 20.7999992370605px;">over your mouse over any of the words to see example uses.</span></p>
+
+<p>Please assign each word to the group that you consider to be most similar. If the word does not seem to be similar to any group, assign it to &ldquo;No Similar Group&rdquo;.</p>
+
+<p>The numbered groups remain constant for these&nbsp;HITs, only the words to assign change.</p>
+
+<p><span style="font-family: Verdana, Geneva, sans-serif; font-size: 11.6999998092651px; line-height: 20.7999992370605px;">** We understand this is a&nbsp;subjective HIT. &nbsp;Rejections will only occur for patterns of&nbsp;</span><span style="font-family: Verdana, Geneva, sans-serif; font-size: 11.6999998092651px; line-height: 20.7999992370605px;">negligent or&nbsp;</span><span style="font-family: Verdana, Geneva, sans-serif; font-size: 11.6999998092651px; line-height: 20.7999992370605px;">scamming behavior. **</span></p>
+</div>
+</div>
+<!-- End Instructions --><!-- Survey Body -->
+
+<section>${tables}
+<h2 style="color: rgb(51, 51, 51);"><strong>Words to Assign</strong></h2>
+${w1}<br />
+${w2}<br />
+${w3}<br />
+${w4}<br />
+${w5}
+<fieldset class="hideme"><textarea class="form-control" id="theBox1" name="keyphrases1"></textarea></fieldset>
+</section>
+<!-- End Survey Body --><!-- close container -->
+<style type="text/css">fieldset {
+  padding: 10px; background:#fbfbfb; border-radius:5px; margin-bottom:5px;
+}
+fieldset.hideme {
+  display: none;
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: center;
+  padding: 2px;
+  font-size: small;
+}
+.ex {
+  position: absolute;
+  background: black;
+  color: #fff;
+  visibility: hidden;
+  opacity: 0;
+}
+span:hover .ex {
+  visibility: visible;
+  opacity: 1;
+}
+</style>
+</div>
+</section>

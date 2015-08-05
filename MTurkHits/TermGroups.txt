@@ -1,0 +1,136 @@
+Term Group HIT
+
+Properties
+-----------
+Title: Identify similar words
+Description: Identify words that have similar meaning or usage
+Keywords: identify, identification, shopping, review, reviews, product, products, key, word, words, term, terms
+Reward per assignment: $0.05
+Number of assignments per HIT: 5
+Time allotted per assignment: 1 hours
+HIT expires in: 14 days
+Auto-approve and pay workers in: 2 days
+Location is US
+Hit approval rate >= 98%
+Number of HITs approved >= 500
+
+Design Layout
+-------------
+<!-- Bootstrap v3.0.3 -->
+<link href="https://s3.amazonaws.com/mturk-public/bs30/css/bootstrap.min.css" rel="stylesheet" />
+<section class="container" id="Survey" style="margin-bottom:15px; padding: 10px 10px; font-family: Verdana, Geneva, sans-serif; color:#333333; font-size:0.9em;">
+<div class="row col-xs-12 col-md-12"><!-- Instructions -->
+<div class="panel panel-primary">
+<div class="panel-heading"><strong>Instructions</strong></div>
+
+<div class="panel-body">
+<p>Completing this HIT constitutes agreement to our <a href="http://www4.ncsu.edu/~mbcusick/consent/consentform.pdf" target="_blank">consent form</a>.</p>
+
+<p>Below are&nbsp;randomly selected words from product reviews. &nbsp;Please&nbsp;determine if any words&nbsp;have&nbsp;similar meaning or&nbsp;usage.</p>
+
+<p>If you find multiple groups of similar words, only select words from the largest group.</p>
+
+<p>If no words are similar, do not select any&nbsp;words and check the box next to &quot;None are similar&quot;.</p>
+
+<p><span style="font-family: Verdana, Geneva, sans-serif; font-size: 11.6999998092651px; line-height: 20.7999992370605px;">Single click a word to select it (the word will become highlighted). Clicking again will unselect it. &nbsp;</span>Hover your mouse over a word to see example <span style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; line-height: 20.7999992370605px;">usage&nbsp;</span><span style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; line-height: 20.7999992370605px;">sentence fragments</span>.</p>
+
+<p><span style="font-family: Verdana, Geneva, sans-serif; font-size: 11.6999998092651px; line-height: 20.7999992370605px;">** We understand this is a&nbsp;subjective HIT. &nbsp;Rejections will only occur for patterns of&nbsp;</span><span style="font-family: Verdana, Geneva, sans-serif; font-size: 11.6999998092651px; line-height: 20.7999992370605px;">negligent or&nbsp;</span><span style="font-family: Verdana, Geneva, sans-serif; font-size: 11.6999998092651px; line-height: 20.7999992370605px;">scamming behavior. **</span></p>
+</div>
+</div>
+<!-- End Instructions --><!-- Survey Body -->
+
+<section>
+<table class="noselect">
+	<tbody>
+		<tr>
+			<td>${g1}</td>
+		</tr>
+		<tr>
+			<td><input name="G1" type="checkbox" value="1" /> None are similar</td>
+		</tr>
+	</tbody>
+</table>
+
+<fieldset class="hideme"><textarea class="form-control" id="theBox1" name="keyphrases1"></textarea></fieldset>
+</section>
+<!-- End Survey Body --><!-- close container -->
+<style type="text/css">fieldset {
+  padding: 10px; background:#fbfbfb; border-radius:5px; margin-bottom:5px;
+}
+fieldset.hideme {
+  display: none;
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: center;
+  padding: 20px;
+}
+.ex {
+  position: absolute;
+  background: black;
+  color: #fff;
+  visibility: hidden;
+  opacity: 0;
+}
+span:hover .ex {
+  visibility: visible;
+  opacity: 1;
+}
+</style>
+</div>
+</section>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script><script>
+var selectedTermsGroup1 = [];
+
+function getJsonObj(element) {
+    return {"word":$(element).text(),"index":$(element).attr('id')};
+}
+
+function addToResult(element, array) {
+    array[array.length] = getJsonObj(element);
+    return array;
+}
+
+function removeFromResult(element, array) {
+    var reviewObj = getJsonObj(element);
+    array = jQuery.grep(array, function(value) {
+        return (value["word"] != reviewObj["word"] && value["index"] != reviewObj["index"]);
+    });
+    return array;
+}
+
+function updateText() {
+    theBox1.value = JSON.stringify(selectedTermsGroup1);
+}
+
+$(function() {
+    $("span.g1").click(function() {
+        var $this = $(this);
+
+        var clickCount = ($this.data("zheToggles") || false);
+        if (clickCount == true) {
+            $this.data("zheToggles", false); 
+            $this.css('color', 'black');
+            $this.css('background', 'white');
+            selectedTermsGroup1 = removeFromResult(this, selectedTermsGroup1);
+        } else {
+            $this.data("zheToggles", true);
+            $this.css('background', 'CornflowerBlue');
+            $this.css('color', 'white');
+            selectedTermsGroup1 = addToResult(this, selectedTermsGroup1);
+        }
+
+        updateText();
+    });
+});
+</script>
